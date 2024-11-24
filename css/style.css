@@ -1,0 +1,217 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic");
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html {
+  font-family: "Open Sans";
+  background: #FFFFFF;
+}
+
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.burger-menu {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.burger-menu_span {
+  display: block;
+  width: 49px;
+  height: 5px;
+  background-color: #DADADA;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+
+@media (max-width: 1200px) {
+  .burger-menu {
+    display: flex;
+  }
+  .header-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-150%);
+    transition: transform 0.3s ease-in-out;
+  }
+  .header-menu.open {
+    transform: translateY(0);
+  }
+  .header-menu_item {
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .burger-menu.open .burger-menu_span:nth-child(1) {
+    transform: rotate(45deg);
+    position: relative;
+    top: 10px;
+  }
+  .burger-menu.open .burger-menu_span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger-menu.open .burger-menu_span:nth-child(3) {
+    transform: rotate(-45deg);
+    position: relative;
+    top: -10px;
+  }
+}
+.header {
+  display: fixed;
+  width: 100%;
+  padding: 24px 0;
+}
+.header_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header_logo {
+  max-width: 97px;
+}
+@media (max-width: 1200px) {
+  .header_logo {
+    max-width: 50px;
+  }
+}
+.header-menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 65px;
+  align-items: center;
+}
+.header-menu_item {
+  color: #552358;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 14px;
+  cursor: pointer;
+}
+@media (max-width: 1500px) {
+  .header-menu_item {
+    font-size: 24px;
+  }
+}
+@media (max-width: 1200px) {
+  .header-menu_item {
+    color: #802A84;
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+.header-menu_item:hover {
+  color: #F9B21E;
+}
+.header-menu_item:last-child {
+  padding: 20px;
+  border: 2px solid #802A84;
+  border-radius: 20px;
+}
+.header-menu_item:last-child:hover {
+  background-color: #802A84;
+  color: #F9B21E;
+  transition: 0.3s ease-in-out;
+  border: 2px solid #802A84;
+}/*# sourceMappingURL=style.css.map */
