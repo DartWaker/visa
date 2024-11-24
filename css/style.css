@@ -168,6 +168,7 @@ html {
   justify-content: space-between;
 }
 .header_logo {
+  z-index: 3;
   max-width: 97px;
 }
 @media (max-width: 1200px) {
