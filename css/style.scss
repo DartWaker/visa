@@ -1,5 +1,6 @@
 @import './_null';
 @import './burger';
+@import './accordion';
 
 .wrapper {
 }
@@ -207,6 +208,9 @@
 
 		&_wrapper {
          padding: 100px 0 100px 0;
+         @media (max-width: 700px){
+               padding: 30px 0 30px 0;
+            }
 		}
 
 		&_title {
@@ -344,3 +348,81 @@
 }
 .container {
 }
+
+
+
+
+.support {
+   padding: 150px 0 50px 0;
+   background: url(../img/dots.png);
+      @media (max-width: 700px){
+         padding: 50px 0 10px 0;
+      }
+		&_wrapper {
+         display: flex;
+         justify-content: space-between;
+         @media (max-width: 1500px) {
+            flex-direction: column;
+         }
+		}
+
+		&_block {
+         max-width: 700px;
+		}
+
+		&_block2 {
+         align-self: center;
+         max-width: 700px;
+            @media (max-width: 1500px){
+               align-self: flex-start;
+            }
+		}
+
+		&_subtitle {
+         display: inline;
+         font-size: 32px;
+         font-weight: 600;
+         line-height: 54px;
+         text-align: left;
+         text-underline-position: from-font;
+         text-decoration-skip-ink: none;
+         color: #FFFFFF;
+         background-color: #2F4ACD;
+         padding: 0 5px;
+            @media (max-width: 700px){
+               font-size: 17px;
+               line-height: 22px;
+            }
+            @media (max-width: 420px){
+               font-size: 14px;
+               line-height: 19px;
+               margin: 0 0 40px 0;
+            }
+		}
+
+		&_text {
+         font-size: 32px;
+         font-weight: 400;
+         line-height: 54px;
+         text-align: left;
+         text-underline-position: from-font;
+         text-decoration-skip-ink: none;
+         margin: 0 0 106px 0;
+         color: #6D776C;
+            @media (max-width: 700px){
+               font-size: 17px;
+               line-height: 22px;
+               margin: 0 0 40px 0;
+            }
+            @media (max-width: 420px){
+               font-size: 14px;
+               line-height: 19px;
+               margin: 0 0 40px 0;
+            }
+		}
+}
+.container {
+}
+
+
+
