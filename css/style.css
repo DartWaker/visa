@@ -175,7 +175,7 @@ html {
   cursor: pointer;
 }
 .accordion .accordion__item .accordion__item-trigger .trigger__text {
-  font-size: 96px;
+  font-size: 66px;
   font-weight: 600;
   line-height: 54px;
   text-align: left;
@@ -183,7 +183,7 @@ html {
   -webkit-text-decoration-skip-ink: none;
           text-decoration-skip-ink: none;
   color: #FFFFFF;
-  padding: 40px 0 40px 100px;
+  padding: 20px 0 20px 30px;
   padding: 40px 0 40px 100px;
 }
 @media (max-width: 1430px) {

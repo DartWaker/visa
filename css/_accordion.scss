@@ -18,14 +18,14 @@
             cursor: pointer;
 
             .trigger__text {
-                font-size: 96px;
+                font-size: 66px;
                 font-weight: 600;
                 line-height: 54px;
                 text-align: left;
                 text-underline-position: from-font;
                 text-decoration-skip-ink: none;
                 color: #FFFFFF;
-                padding: 40px 0 40px 100px ;
+                padding: 20px 0 20px 30px;
                 @media (max-width: 1430px) {
                     font-size: 60px;
                 }
@@ -104,7 +104,6 @@
 		}
 }
 .content {
-
 		&__text {
             padding: 0 0 50px 141px;
             background: url(../img/flight_24px.png) 60px 0 no-repeat;
