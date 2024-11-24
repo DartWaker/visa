@@ -485,8 +485,8 @@ html {
 }
 @media (max-width: 600px) {
   .services_list-item::before {
-    top: 0px;
-    left: -42px;
+    top: 2px;
+    left: -41px;
   }
 }
 @media (max-width: 1380px) {
