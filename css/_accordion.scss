@@ -18,21 +18,21 @@
             cursor: pointer;
 
             .trigger__text {
-                font-size: 66px;
+                font-size: 60px;
                 font-weight: 600;
-                line-height: 54px;
+                line-height: 34px;
                 text-align: left;
                 text-underline-position: from-font;
                 text-decoration-skip-ink: none;
                 color: #FFFFFF;
-                padding: 20px 0 20px 30px;
+                padding: 10px 0 10px 30px;
                 @media (max-width: 1430px) {
                     font-size: 60px;
                 }
                 padding: 40px 0 40px 100px ;
                 @media (max-width: 1030px) {
                     font-size: 40px;
-                    padding: 20px 0 20px 30px;
+                    padding: 10px 0 10px 30px;
                 }
                 @media (max-width: 705px) {
                     font-size: 13px;
