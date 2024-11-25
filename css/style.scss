@@ -426,3 +426,31 @@
 
 
 
+
+
+
+.work {
+   
+		&_wrapper {
+         padding: 120px 0 40px 0;
+         @media (max-width: 1000px) {
+            padding: 40px 0 0 0;
+         }
+		}
+
+		&_title {
+		}
+
+		&_text {
+		}
+}
+.container {
+}
+.support {
+
+		&_subtitle {
+		}
+
+		&_text {
+		}
+}

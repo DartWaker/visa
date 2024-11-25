@@ -848,4 +848,13 @@ html {
     line-height: 19px;
     margin: 0 0 40px 0;
   }
+}
+
+.work_wrapper {
+  padding: 120px 0 40px 0;
+}
+@media (max-width: 1000px) {
+  .work_wrapper {
+    padding: 40px 0 0 0;
+  }
 }/*# sourceMappingURL=style.css.map */
