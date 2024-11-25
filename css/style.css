@@ -241,7 +241,7 @@ html {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 1s ease, opacity 0.5s ease;
+  transition: max-height 0.5s ease, opacity 0.3s ease;
 }
 .accordion .accordion__item .accordion__item-content .content__text {
   margin: 10px;
