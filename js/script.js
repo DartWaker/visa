@@ -36,3 +36,28 @@ function accordion() {
     })
 }
 accordion() 
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const triggers = document.querySelectorAll('.about-managers_trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const parentBlock = trigger.closest('.about-managers_accordion-block');
+      
+      if (parentBlock.classList.contains('active')) {
+        parentBlock.classList.remove('active');
+      } else {
+        // Если нужно закрывать другие блоки при открытии одного, раскомментируйте следующий код:
+        // document.querySelectorAll('.about-managers_accordion-block.active').forEach(activeBlock => {
+        //   activeBlock.classList.remove('active');
+        // });
+        
+        parentBlock.classList.add('active');
+      }
+    });
+  });
+});
