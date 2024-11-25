@@ -175,12 +175,14 @@
 
   @media (max-width: 1400px){
     .about-managers_accordion-text {
-      display: none; /* Изначально скрываем текст */
-      transition: max-height 0.3s ease-out;
-      overflow: hidden;
+      max-height: 0; /* Начальное состояние */
+      opacity: 0; /* Прозрачность в скрытом состоянии */
+      overflow: hidden; /* Скрываем содержимое */
+      transition: max-height 1s ease, opacity 0.3s ease; /* Добавляем анимацию */
     }
 
     .about-managers_accordion-block.active .about-managers_accordion-text {
-      display: block; /* Показываем текст при активном блоке */
+      max-height: 500px; /* Максимальная высота (выберите значение под контент) */
+      opacity: 1; /* Делаем текст видимым */
     }
   }

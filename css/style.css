@@ -223,7 +223,8 @@ html {
   }
 }
 .accordion .accordion__item.accordion__item-active .accordion__item-content {
-  display: block;
+  max-height: 3500px; /* Задайте подходящую высоту */
+  opacity: 1; /* Делаем контент видимым */
 }
 .accordion .accordion__item.accordion__item-active .trigger__img {
   transform: rotate(180deg) translatex(50%);
@@ -237,9 +238,10 @@ html {
   transition: 0.1s all ease;
 }
 .accordion .accordion__item .accordion__item-content {
-  padding-bottom: 20px;
-  display: none;
-  animation: fade 0.3s ease;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 .accordion .accordion__item .accordion__item-content .content__text {
   margin: 10px;
@@ -629,12 +631,14 @@ html {
 
 @media (max-width: 1400px) {
   .about-managers_accordion-text {
-    display: none; /* Изначально скрываем текст */
-    transition: max-height 0.3s ease-out;
-    overflow: hidden;
+    max-height: 0; /* Начальное состояние */
+    opacity: 0; /* Прозрачность в скрытом состоянии */
+    overflow: hidden; /* Скрываем содержимое */
+    transition: max-height 1s ease, opacity 0.3s ease; /* Добавляем анимацию */
   }
   .about-managers_accordion-block.active .about-managers_accordion-text {
-    display: block; /* Показываем текст при активном блоке */
+    max-height: 500px; /* Максимальная высота (выберите значение под контент) */
+    opacity: 1; /* Делаем текст видимым */
   }
 }
 .header {

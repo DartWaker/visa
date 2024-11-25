@@ -60,7 +60,8 @@
         // Active state styles
         &.accordion__item-active {
             .accordion__item-content {
-                display: block;
+                max-height: 3500px; /* Задайте подходящую высоту */
+                 opacity: 1; /* Делаем контент видимым */
             }
 
             .trigger__img{
@@ -79,9 +80,10 @@
 
         // Content styles
         .accordion__item-content {
-            padding-bottom: 20px;
-            display: none;
-            animation: fade 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
             .content__text {
                 margin: 10px;
 
