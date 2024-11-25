@@ -523,8 +523,8 @@ html {
 }
 @media (max-width: 1400px) and (max-width: 450px) {
   .about-managers_accordion-block::after {
-    top: 6px;
-    right: -30px;
+    top: 8px;
+    right: -10px;
     background-size: 10px;
   }
 }
@@ -1119,7 +1119,7 @@ html {
 }
 @media (max-width: 700px) {
   .ours-managers_title {
-    font-size: 43px;
+    font-size: 38px;
     line-height: 40px;
     padding: 0 0 20px 20px;
   }
