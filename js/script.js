@@ -5,6 +5,13 @@ const menuItems = document.querySelectorAll('.header-menu_item');
 burgerMenu.addEventListener('click', () => {
   burgerMenu.classList.toggle('open');
   menu.classList.toggle('open');
+  
+  // Забороняємо скрол на body при відкритті меню
+  if (menu.classList.contains('open')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
 });
 
 // Додаємо обробник події для кожного елемента меню
@@ -13,9 +20,13 @@ menuItems.forEach(item => {
     if (menu.classList.contains('open')) {
       burgerMenu.classList.remove('open');
       menu.classList.remove('open');
+      
+      // Відновлюємо скрол після закриття меню
+      document.body.style.overflow = '';
     }
   });
 });
+
 
 
 // Аккордеон
