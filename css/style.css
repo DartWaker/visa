@@ -1185,14 +1185,14 @@ html {
   margin-bottom: 0;
   border-radius: 10px;
   padding: 0 0 0 15px;
-  box-shadow: 2px 0px 23px -7px rgba(28, 19, 66, 0.384);
+  box-shadow: 2px 2px px -7px rgba(28, 19, 66, 0.384);
 }
 .work_span2 {
   line-height: 40px;
   margin-bottom: 0;
   border-radius: 10px;
   padding: 0 0 0 15px;
-  box-shadow: 2px 0px 23px -7px rgba(28, 19, 66, 0.384);
+  box-shadow: 2px 0px 3px -7px rgba(28, 19, 66, 0.384);
 }
 .work_picture {
   max-width: 300px;
@@ -1416,4 +1416,8 @@ html {
   .flags_countryes {
     max-width: 30px;
   }
+}
+
+.ours-managers_photo {
+  max-width: 320px;
 }/*# sourceMappingURL=style.css.map */
