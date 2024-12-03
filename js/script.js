@@ -20,22 +20,22 @@ menuItems.forEach(item => {
 
 // Аккордеон
 function accordion() {
-    const items = document.querySelectorAll('.accordion__item-trigger')
-    items.forEach(item => {
-        item.addEventListener('click', () => {
-            const parent = item.parentNode
-            if (parent.classList.contains('accordion__item-active')) {
-                parent.classList.remove('accordion__item-active')
-            } else {
-                document
-                    .querySelectorAll('.accordion__item')
-                    .forEach(child => child.classList.remove('accordion__item-active'))   
-                parent.classList.add('accordion__item-active')
-            }
-        })
+  const items = document.querySelectorAll('.accordion__item-trigger')
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const parent = item.parentNode
+      if (parent.classList.contains('accordion__item-active')) {
+        parent.classList.remove('accordion__item-active')
+      } else {
+        document
+          .querySelectorAll('.accordion__item')
+          .forEach(child => child.classList.remove('accordion__item-active'))
+        parent.classList.add('accordion__item-active')
+      }
     })
+  })
 }
-accordion() 
+accordion()
 
 
 
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   triggers.forEach(trigger => {
     trigger.addEventListener('click', () => {
       const parentBlock = trigger.closest('.about-managers_accordion-block');
-      
+
       if (parentBlock.classList.contains('active')) {
         parentBlock.classList.remove('active');
       } else {
@@ -55,9 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // document.querySelectorAll('.about-managers_accordion-block.active').forEach(activeBlock => {
         //   activeBlock.classList.remove('active');
         // });
-        
+
         parentBlock.classList.add('active');
       }
     });
   });
+});
+
+window.scrollTo({
+  top: 10, // кількість пікселів зверху
+  behavior: 'smooth' // плавність анімації
 });
