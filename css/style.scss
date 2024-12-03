@@ -4,8 +4,15 @@
 @import "./accordion2";
 
 .header {
-  width: 100%;
   padding: 12px 0;
+  position: fixed;  /* Зробимо хедер фіксованим */
+  top: 0; /* Закріплюємо до верху */
+  left: 0;
+  width: 100%; /* Ширина на всю сторінку */
+  z-index: 1000; /* Високий індекс для перекриття інших елементів */
+  background-color: #fff; /* Фон для хедера, щоб він був видно поверх інших елементів */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легка тінь, щоб хедер виглядав більш відокремлено */
+
   &_wrapper {
     display: flex;
     align-items: center;
@@ -13,7 +20,7 @@
   }
 
   &_logo {
-    z-index: 3;
+    z-index: 2000;
     max-width: 75px;
     @media (max-width: 1200px) {
       max-width: 50px;
@@ -27,9 +34,11 @@
   justify-content: center;
   gap: 65px;
   align-items: center;
+  transition: transform 0.3s ease-in-out; /* Додаємо плавний перехід */
   @media (max-width: 1260px) {
     gap: 20px;
   }
+  
   &_item {
     color: #552358;
     font-size: 17px;
@@ -77,6 +86,30 @@
       }
     }
   }
+
+  /* Анімація для мобільного меню */
+  @media (max-width: 1260px) {
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Зробимо меню фіксованим */
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    height: 100vh; /* Задаємо висоту 100% від висоти екрану */
+    transform: translateY(-100%); /* Спочатку приховуємо меню */
+    z-index: 999; /* Меню на передньому плані */
+  }
+
+  &.open {
+    transform: translateY(0); /* Меню повинно бути видно */
+  }
+
+  .header-menu_item {
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+  }
 }
 
 .company {
@@ -93,7 +126,7 @@
     align-items: center;
     padding: 70px 0 100px 0;
     @media (max-width: 1000px) {
-      padding: 40px 0 50px 0;
+      padding: 100px 0 50px 0;
     }
   }
 
@@ -114,6 +147,7 @@
     background-color: #fff;
     border-radius: 10px;
     text-transform: uppercase;
+    box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.699);
     @media (max-width: 1260px) {
     }
     @media (max-width: 600px) {
@@ -131,6 +165,8 @@
       border: 2px solid #802a84;
     }
     &:active {
+      transform: translatey(1px);
+      box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.699);
       background-color: #802a84;
       color: #fafafa;
       transition: 0.3s ease-in-out;
@@ -677,7 +713,7 @@
     display: flex;
     background: #f9b21e45;
     align-items: center;
-    margin: 0 0 150px 100px;
+    margin: 0 0 150px 150px;
     @media (max-width: 1400px) {
       margin: 0 0 70px 40px;
     }
@@ -693,6 +729,9 @@
     background: #f9b21e45;
     align-items: center;
     margin: 0 100px 150px 0;
+    // &:last-child{
+    //   margin: 0 100px 0 0;
+    // }
     @media (max-width: 1400px) {
       margin: 0 40px 70px 0px;
     }
@@ -747,4 +786,157 @@
     &_photo{
       max-width: 320px;
     }
+}
+
+
+
+.comments {
+
+  &_wrapper {
+    padding: 50px 0 100px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid silver;
+  }
+
+  &_title {
+    text-align: center;
+    font-size: 96px;
+    font-weight: 600;
+    line-height: 57px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #802A84;
+    margin: 0 0 70px 0;
+    @media (max-width: 700px) {
+      font-size: 60px;
+      line-height: 70px;
+      margin: 0 0 30px 0;
+    }
+  }
+
+  &_hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  &_block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 1 330px;
+    background-color: #00000005;
+    padding: 20px;
+    border-radius: 10%;
+    box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.363);
+  }
+
+  &_rating {
+    margin: 0 0 50px 0;
+  }
+
+  &_text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.4px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #222222;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.445);
+  }
+
+  &_user-block {
+    display: flex;
+    align-items: center;
+    padding: 10px 0 0 0;
+    gap: 10px;
+  }
+
+  &_avatar {
+    overflow: hidden;
+    max-width: 50px;
+    border-radius: 50%;
+  }
+
+  &_name {
+  }
+}
+.container {
+}
+.rating-picture {
+}
+.avatar {
+}
+
+.container-comments{
+  @media (max-width: 1520px) {
+    max-width: 1080px;
+  }
+}
+
+
+
+
+
+
+.footer {
+  padding: 60px 0;
+  @media (max-width: 730px) {
+    padding: 10px 0;
+  }
+  &_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    @media (max-width: 730px){
+      justify-content: space-around;
+      padding: 20px 0;
+    }
+  }
+
+  &_logo {
+    @media (max-width: 730px){
+      order: 2;
+    }
+  }
+
+  &_menu {
+
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    @media (max-width: 730px){
+      gap: 15px;
+      flex-direction: column;
+      order: 1;
+    }
+  }
+
+  &_menu-item {
+    color: #552358;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 14px;
+    @media (max-width: 730px) {
+      font-size: 13px;
+      max-width: 100px;
+    }
+    cursor: pointer;
+    &:hover {
+      color: #f9b21e;
+    }
+  }
+}
+.container {
+}
+.footer-logo {
+  max-width: 50px;
 }

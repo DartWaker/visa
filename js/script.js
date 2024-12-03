@@ -27,8 +27,6 @@ menuItems.forEach(item => {
   });
 });
 
-
-
 // Аккордеон
 function accordion() {
   const items = document.querySelectorAll('.accordion__item-trigger')
