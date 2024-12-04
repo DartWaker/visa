@@ -75,3 +75,42 @@ window.scrollTo({
   top: 10, // кількість пікселів зверху
   behavior: 'smooth' // плавність анімації
 });
+
+
+
+// Отримуємо елементи
+const modal = document.querySelector('.modal'); // Модальне вікно
+const modalWindow = document.querySelector('.modal_window'); // Вікно всередині модального
+const openButtons = document.querySelectorAll('.contact-uss'); // Кнопки для відкриття модалки
+const closeButton = document.querySelector('.modal_close'); // Кнопка для закриття модалки
+const body = document.querySelector('body'); // Тіло сторінки
+
+// Функція для відкриття модального вікна
+function openModal() {
+  modalWindow.style.display = 'block';
+  modal.style.display = 'block';
+  body.style.overflow = 'hidden'; // Блокуємо прокручування сторінки
+}
+
+// Функція для закриття модального вікна
+function closeModal() {
+  modalWindow.style.display = 'none';
+  modal.style.display = 'none';
+  body.style.overflow = ''; // Відновлюємо прокручування сторінки
+}
+
+// Додаємо слухачі подій на кнопки для відкриття модалки
+openButtons.forEach(button => {
+  button.addEventListener('click', openModal);
+});
+
+// Додаємо слухач на кнопку закриття модалки
+closeButton.addEventListener('click', closeModal);
+
+// Закриваємо модальне вікно при кліку поза ним
+window.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+

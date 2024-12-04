@@ -8,6 +8,34 @@
   </head>
   <body>
     <div class="wrapper">
+      <div class="modal">
+        <div class="modal_window">
+          <div class="modal_header">
+            <h2 class="modal_title">Contact us</h2>
+            <div class="modal_close">
+              <img src="img/close.png" alt="close">
+            </div>
+          </div>
+          <form action="#" class="modal_form" method="post">
+            <div class="form-example">
+              <input type="text" class="name" name="username" placeholder="Name">
+            </div>
+            <div class="form-example">
+              <input type="tel" class="tel" name="tel">
+            </div>
+            <div class="form-example form-text">
+              <textarea maxlength="160" class="placeholder" name="area" placeholder="Enter your message..." id="area"></textarea>
+            </div>
+            <div class="form-example radio-example">
+              <input type="radio" name="client" value="For myself"> 
+              <span class="form-span">For myself</span>
+              <input type="radio" name="client" value="For my clients"> 
+              <span class="form-span">For my clients</span>
+            </div>
+            <input class="form-submit" type="submit" value="Send a message">
+          </form>
+        </div>
+      </div>
       <div class="header">
         <div class="container">
           <div class="header_wrapper">
@@ -15,12 +43,12 @@
               <img src="./img/logo.svg" alt="lgo" />
             </div>
             <ul class="header_menu header-menu">
-              <li class="header-menu_item">Home</li>
-              <li class="header-menu_item">About Us</li>
-              <li class="header-menu_item">Services</li>
-              <li class="header-menu_item">Document Samples</li>
-              <li class="header-menu_item">Reviews</li>
-              <li class="header-menu_item">Contact Us</li>
+              <li class="header-menu_item" onclick="location.href='#company';" >Home</li>
+              <li class="header-menu_item" onclick="location.href='#about';" >About Us</li>
+              <li class="header-menu_item" onclick="location.href='#services';" >Services</li>
+              <li class="header-menu_item" onclick="location.href='#work';" >Work Permit</li>
+              <li class="header-menu_item" onclick="location.href='#reviews';" >Reviews</li>
+              <li class="header-menu_item contact-uss">Contact Us</li>
             </ul>
             <div class="burger-menu" id="burger-menu">
               <span class="burger-menu_span"></span>
@@ -31,7 +59,7 @@
         </div>
       </div>
       <div class="main">
-        <section class="company">
+        <section id="company" class="company">
           <div class="container">
             <div class="company_wrapper">
               <div class="company_box">
@@ -44,7 +72,7 @@
                   <img src="./img/earth.png" alt="plane" />
                 </div>
                 <div class="company_button-box">
-                  <button class="company_button">CONTUCT US</button>
+                  <button class="company_button contact-uss">CONTACT US</button>
                 </div>
               </div>
               <div class="company_flags">
@@ -94,7 +122,7 @@
             </div>
           </div>
         </section>
-        <section class="about-us">
+        <section id="about" class="about-us">
           <div class="container">
             <div class="about-us_wrapper">
               <h2 class="about-us_title">about us</h2>
@@ -123,7 +151,7 @@
             </div>
           </div>
         </section>
-        <section class="services">
+        <section id="services" class="services">
           <div class="container">
             <div class="services_wrapper">
               <h2 class="services_title">services</h2>
@@ -188,7 +216,7 @@
             </div>
           </div>
         </section>
-        <section class="accordion-box">
+        <section id="work" class="accordion-box">
           <div class="container container2">
             <h2 class="accordion_title">WORK PERMIT</h2>
             <!-- Accordion -->
@@ -739,7 +767,7 @@
             </div>
           </div>
         </section>
-        <section class="comments">
+        <section id="reviews" class="comments">
           <div class="container container-comments">
             <div class="comments_wrapper">
                <h2 class="comments_title">REVIEWS</h2>
@@ -775,7 +803,7 @@
                   <div class="comments_text">I had a great experience with VIZA WORK AGENCY. They helped me with my visa and found a job for me in Europe. The team was very friendly and supportive. I highly recommend them to anyone looking for work abroad!</div>
                   <div class="comments_user-block">
                     <div class="comments_avatar">
-                      <img src="img/3p.png" alt="" class="avatar">
+                      <img src="img/2p.png" alt="" class="avatar">
                     </div>
                     <div class="comments_name">Anna</div>
                   </div>
@@ -804,11 +832,11 @@
               <img src="img/logo.svg" alt="logo" class="footer-logo">
             </div>
             <ul class="footer_menu">
-              <li class="footer_menu-item">Home</li>
-              <li class="footer_menu-item">About As</li>
-              <li class="footer_menu-item">Services</li>
-              <li class="footer_menu-item">Document Samples</li>
-              <li class="footer_menu-item">Reviews</li>
+              <li class="footer_menu-item" onclick="location.href='#company';"  >Home</li>
+              <li class="footer_menu-item" onclick="location.href='#about';" >About As</li>
+              <li class="footer_menu-item" onclick="location.href='#services';" >Services</li>
+              <li class="footer_menu-item" onclick="location.href='#work';" >Work Permit</li>
+              <li class="footer_menu-item" onclick="location.href='#reviews';" >Reviews</li>
             </ul>
           </div>
         </div>
