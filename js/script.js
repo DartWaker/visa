@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const burgerMenu = document.getElementById('burger-menu');
 const menu = document.querySelector('.header-menu');
 const menuItems = document.querySelectorAll('.header-menu_item');
@@ -116,25 +118,36 @@ window.addEventListener('click', (event) => {
 
 
 
-const TOKEN = '7158735408:AAHCwJfR6yKpbD5vhUg1_ORAu4Mtk1-w6mU';
-const CHAT_ID = '-1002058485237';
+const TOKEN = process.env.TELEGRAM_TOKEN;
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
 document.querySelector('.modal_form').addEventListener('submit', function (e) {
     e.preventDefault();
 
+    // Створення повідомлення для відправки
     let message = `Повідомлення з сайту!\n`;
     message += `Ім'я: ${this.username.value} \n`;
     message += `Номер телефону: ${this.tel.value}\n`;
     message += `Повідомлення: ${this.area.value} \n`;
-    
+
     // Отримуємо вибрану радіокнопку
-    const clientType = this.client ? this.client.value : 'Не вибрано';
+    const clientRadioButtons = this.querySelectorAll('input[name="client"]');
+    let clientType = 'Не вибрано';
+    
+    // Шукаємо вибрану радіокнопку
+    clientRadioButtons.forEach((radio) => {
+        if (radio.checked) {
+            clientType = radio.value;
+        }
+    });
+
     message += `Тип клієнта: ${clientType} \n`;
 
+    // Відправка повідомлення через Telegram API
     axios.post(URI_API, {
         chat_id: CHAT_ID,
-        parse_mode: 'HTML', // Змінив 'parse_mod' на правильний 'parse_mode'
+        parse_mode: 'HTML', // Замінили 'parse_mod' на правильний 'parse_mode'
         text: message
     })
     .then((res) => {
@@ -146,13 +159,45 @@ document.querySelector('.modal_form').addEventListener('submit', function (e) {
         radioButtons.forEach((radio) => radio.checked = false);
 
         // Показуємо звичайний alert після успішної відправки
-        alert("Повідомлення успішно надіслано!");
+        alert("Thank you, we will get in touch with you shortly!");
+
+        // Закриваємо модальне вікно
+        closeModal();
     })
     .catch((err) => {
         console.warn(err); 
-        alert("Сталася помилка при відправці.");
+        alert("Something went wrong.");
+
+        // Закриваємо модальне вікно
+        closeModal();
     })
     .finally(() => {
         console.log('end');
     });
 });
+
+// Функція для закриття модального вікна
+function closeModal() {
+    const modal = document.querySelector('.modal'); // Модальне вікно
+    const modalWindow = document.querySelector('.modal_window'); // Вікно всередині модального
+    const body = document.querySelector('body'); // Тіло сторінки
+
+    modalWindow.style.display = 'none';
+    modal.style.display = 'none';
+    body.style.overflow = ''; // Відновлюємо прокручування сторінки
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const phoneInput = document.getElementById('tel');
+
+  // Маска для телефонного номеру з початком +420 або +48
+  const phoneMask = new Inputmask([
+      '+4999999999999',  // Маска для +420
+  ]);
+  
+  phoneMask.mask(phoneInput);  // Підключення маски до поля вводу
+});
+

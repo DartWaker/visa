@@ -18,18 +18,18 @@
           </div>
           <form action="#" class="modal_form" method="post">
             <div class="form-example">
-              <input type="text" class="name" name="username" placeholder="Name">
+              <input type="text" class="name" name="username" placeholder="Name" required>
             </div>
             <div class="form-example">
-              <input type="tel" class="tel" name="tel">
+              <input type="tel" id="tel" class="tel" name="tel" placeholder="Your number (WhatsApp)" required>
             </div>
             <div class="form-example form-text">
               <textarea maxlength="160" class="placeholder" name="area" placeholder="Enter your message..." id="area"></textarea>
             </div>
             <div class="form-example radio-example">
-              <input type="radio" name="client" value="For myself"> 
+              <input type="radio" name="client" value="For myself" required> 
               <span class="form-span">For myself</span>
-              <input type="radio" name="client" value="For my clients"> 
+              <input type="radio" name="client" value="For my clients" required> 
               <span class="form-span">For my clients</span>
             </div>
             <input class="form-submit" type="submit" value="Send a message">
@@ -842,6 +842,8 @@
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.6-beta.23/dist/inputmask.min.js"></script>
     <script src="./js/script.js"></script>
   </body>
 </html>
