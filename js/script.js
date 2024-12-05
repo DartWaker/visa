@@ -114,3 +114,45 @@ window.addEventListener('click', (event) => {
   }
 });
 
+
+
+const TOKEN = '7158735408:AAHCwJfR6yKpbD5vhUg1_ORAu4Mtk1-w6mU';
+const CHAT_ID = '-1002058485237';
+const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+document.querySelector('.modal_form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let message = `Повідомлення з сайту!\n`;
+    message += `Ім'я: ${this.username.value} \n`;
+    message += `Номер телефону: ${this.tel.value}\n`;
+    message += `Повідомлення: ${this.area.value} \n`;
+    
+    // Отримуємо вибрану радіокнопку
+    const clientType = this.client ? this.client.value : 'Не вибрано';
+    message += `Тип клієнта: ${clientType} \n`;
+
+    axios.post(URI_API, {
+        chat_id: CHAT_ID,
+        parse_mode: 'HTML', // Змінив 'parse_mod' на правильний 'parse_mode'
+        text: message
+    })
+    .then((res) => {
+        // Очищення полів форми після відправки
+        this.username.value = "";
+        this.tel.value = "";
+        this.area.value = "";
+        const radioButtons = this.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach((radio) => radio.checked = false);
+
+        // Показуємо звичайний alert після успішної відправки
+        alert("Повідомлення успішно надіслано!");
+    })
+    .catch((err) => {
+        console.warn(err); 
+        alert("Сталася помилка при відправці.");
+    })
+    .finally(() => {
+        console.log('end');
+    });
+});
