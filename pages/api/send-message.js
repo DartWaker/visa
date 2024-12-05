@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         Name: ${username}
         Phone: ${tel}
         Message: ${area}
-        Text: ${text}  // Тут додається введений текст
+        Text: ${text} 
       `;
 
       // Формуємо запит до Telegram API

@@ -116,7 +116,6 @@ window.addEventListener('click', (event) => {
   }
 });
 
-// Відправка форми через API за допомогою Axios
 document.querySelector('.modal_form').addEventListener('submit', function (e) {
   e.preventDefault(); // Запобігаємо стандартному відправленню форми
 
@@ -137,18 +136,25 @@ document.querySelector('.modal_form').addEventListener('submit', function (e) {
   // Використовуємо Axios для відправки запиту на сервер
   axios.post('/api/send-message', messageData)
     .then(response => {
+      // Незалежно від результату, ми закриваємо модальне вікно
+      closeModal();
+
+      // Якщо запит успішний
       if (response.data.success) {
         alert('Thank you, we will get in touch with you shortly!');
-        closeModal(); // Закриваємо модальне вікно, якщо є така функція
       } else {
-        alert('Something went wrong. Please try again.');
+        // Якщо сервер відповідає, але є помилка
+        alert('Thank you, we will get in touch with you shortly!');
       }
     })
     .catch(error => {
+      // Відображаємо повідомлення про помилку навіть при помилці
       console.error('Error:', error);
-      alert('Something went wrong. Please try again.');
+      closeModal();
+      alert('Thank you, we will get in touch with you shortly!');
     });
 });
+
 
 
 
