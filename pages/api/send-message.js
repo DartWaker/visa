@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
       const { username, tel, area, client } = req.body;
 
       // Перевірка, чи всі необхідні поля заповнені
-      if (!username || !tel || !client) {
+      if (!username || !tel) {
         return res.status(400).json({ success: false, message: 'All fields are required' });
       }
 
