@@ -136,6 +136,9 @@ document.querySelector('.modal_form').addEventListener('submit', function (e) {
   // Закриваємо модальне вікно перед відправкою запиту
   closeModal();
 
+  // Очищаємо форму після закриття модального вікна
+  this.reset();
+
   // Використовуємо Axios для відправки запиту на сервер
   axios.post('/api/send-message', messageData)
     .then(response => {
