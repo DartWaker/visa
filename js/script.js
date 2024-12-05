@@ -1,5 +1,3 @@
-require('dotenv').config();  // Завантажуємо змінні середовища
-
 const burgerMenu = document.getElementById('burger-menu');
 const menu = document.querySelector('.header-menu');
 const menuItems = document.querySelectorAll('.header-menu_item');
@@ -22,28 +20,30 @@ menuItems.forEach(item => {
     if (menu.classList.contains('open')) {
       burgerMenu.classList.remove('open');
       menu.classList.remove('open');
+      
+      // Відновлюємо скрол після закриття меню
       document.body.style.overflow = '';
     }
   });
 });
 
+// Аккордеон
 function accordion() {
-  const items = document.querySelectorAll('.accordion__item-trigger')
+  const items = document.querySelectorAll('.accordion__item-trigger');
   items.forEach(item => {
     item.addEventListener('click', () => {
-      const parent = item.parentNode
+      const parent = item.parentNode;
       if (parent.classList.contains('accordion__item-active')) {
-        parent.classList.remove('accordion__item-active')
+        parent.classList.remove('accordion__item-active');
       } else {
-        document
-          .querySelectorAll('.accordion__item')
-          .forEach(child => child.classList.remove('accordion__item-active'))
-        parent.classList.add('accordion__item-active')
+        document.querySelectorAll('.accordion__item')
+          .forEach(child => child.classList.remove('accordion__item-active'));
+        parent.classList.add('accordion__item-active');
       }
-    })
-  })
+    });
+  });
 }
-accordion()
+accordion();
 
 document.addEventListener('DOMContentLoaded', () => {
   const triggers = document.querySelectorAll('.about-managers_trigger');
@@ -59,90 +59,86 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
-  // Маска для телефонного номеру
-  const phoneInput = document.getElementById('tel');
-  const phoneMask = new Inputmask([
-    '+420999999999', 
-    '+48 999 999 999'
-  ]);
-  phoneMask.mask(phoneInput);
 });
 
-const modal = document.querySelector('.modal');
-const modalWindow = document.querySelector('.modal_window');
-const openButtons = document.querySelectorAll('.contact-uss');
-const closeButton = document.querySelector('.modal_close');
-const body = document.querySelector('body');
+window.scrollTo({
+  top: 10, // кількість пікселів зверху
+  behavior: 'smooth' // плавність анімації
+});
 
+// Модальне вікно та форма
+const modal = document.querySelector('.modal'); // Модальне вікно
+const modalWindow = document.querySelector('.modal_window'); // Вікно всередині модального
+const openButtons = document.querySelectorAll('.contact-uss'); // Кнопки для відкриття модалки
+const closeButton = document.querySelector('.modal_close'); // Кнопка для закриття модалки
+const body = document.querySelector('body'); // Тіло сторінки
+
+// Функція для відкриття модального вікна
 function openModal() {
   modalWindow.style.display = 'block';
   modal.style.display = 'block';
-  body.style.overflow = 'hidden'; 
+  body.style.overflow = 'hidden'; // Блокуємо прокручування сторінки
 }
 
+// Функція для закриття модального вікна
 function closeModal() {
   modalWindow.style.display = 'none';
   modal.style.display = 'none';
-  body.style.overflow = ''; 
+  body.style.overflow = ''; // Відновлюємо прокручування сторінки
 }
 
+// Додаємо слухачі подій на кнопки для відкриття модалки
 openButtons.forEach(button => {
   button.addEventListener('click', openModal);
 });
 
+// Додаємо слухач на кнопку закриття модалки
 closeButton.addEventListener('click', closeModal);
 
+// Закриваємо модальне вікно при кліку поза ним
 window.addEventListener('click', (event) => {
   if (event.target === modal) {
     closeModal();
   }
 });
 
-const TOKEN = process.env.TELEGRAM_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+// Маска для телефонного номеру з початком +420 або +48
+document.addEventListener('DOMContentLoaded', function() {
+  const phoneInput = document.getElementById('tel');
+  const phoneMask = new Inputmask('+9999999999999');  // Маска для телефонного номеру
+  phoneMask.mask(phoneInput);  // Підключення маски до поля вводу
+});
 
+// Відправка форми через API
 document.querySelector('.modal_form').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  let message = `Повідомлення з сайту!\n`;
-  message += `Ім'я: ${this.username.value} \n`;
-  message += `Номер телефону: ${this.tel.value}\n`;
-  message += `Повідомлення: ${this.area.value} \n`;
+  const messageData = {
+    username: this.username.value,
+    tel: this.tel.value,
+    area: this.area.value,
+    clientType: this.querySelector('input[name="client"]:checked').value
+  };
 
-  const clientRadioButtons = this.querySelectorAll('input[name="client"]');
-  let clientType = 'Не вибрано';
-  
-  clientRadioButtons.forEach((radio) => {
-    if (radio.checked) {
-      clientType = radio.value;
+  // Відправка запиту на сервер
+  fetch('/api/send-message', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(messageData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Thank you, we will get in touch with you shortly!');
+      closeModal(); // Закриваємо модальне вікно
+    } else {
+      alert('Something went wrong.');
     }
-  });
-
-  message += `Тип клієнта: ${clientType} \n`;
-
-  axios.post(URI_API, {
-    chat_id: CHAT_ID,
-    parse_mode: 'HTML',
-    text: message
   })
-  .then((res) => {
-    this.username.value = "";
-    this.tel.value = "";
-    this.area.value = "";
-    const radioButtons = this.querySelectorAll('input[type="radio"]');
-    radioButtons.forEach((radio) => radio.checked = false);
-
-    alert("Thank you, we will get in touch with you shortly!");
-    closeModal();
-  })
-  .catch((err) => {
-    console.warn(err); 
-    alert("Something went wrong.");
-    closeModal();
-  })
-  .finally(() => {
-    console.log('end');
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Something went wrong.');
   });
 });
