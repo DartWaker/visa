@@ -1716,6 +1716,29 @@ html {
   color: rgba(34, 29, 76, 0.5254901961);
 }
 
+.text {
+  width: 400px;
+  border-radius: 10px;
+  border: 2px solid #221d4c;
+  height: 40px;
+  padding: 0 0 0 10px;
+}
+@media (max-width: 560px) {
+  .text {
+    width: 300px;
+  }
+}
+
+.text::-moz-placeholder {
+  font-weight: 500;
+  color: rgba(34, 29, 76, 0.5254901961);
+}
+
+.text::placeholder {
+  font-weight: 500;
+  color: rgba(34, 29, 76, 0.5254901961);
+}
+
 .tel {
   width: 400px;
   border-radius: 10px;

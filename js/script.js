@@ -117,7 +117,7 @@ document.querySelector('.modal_form').addEventListener('submit', function (e) {
     username: this.username.value,
     tel: this.tel.value,
     area: this.area.value,
-    clientType: this.querySelector('input[name="client"]:checked').value
+    clientType: this.text.value
   };
 
   // Відправка запиту на сервер
