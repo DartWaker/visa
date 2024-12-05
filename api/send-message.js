@@ -1,39 +1,31 @@
-// pages/api/send-message.js
+const axios = require('axios');
+const dotenv = require('dotenv');
+dotenv.config(); // Це підключає .env файл
 
-import axios from 'axios'; // або require('axios') для CommonJS
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   if (req.method === 'POST') {
-    const { username, tel, area, clientType } = req.body;
-    
-    // Отримуємо змінні з середовища
-    const TOKEN = process.env.TELEGRAM_TOKEN;
-    const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-    const telegramMessage = `
-      Повідомлення з сайту:
-      Ім'я: ${username}
-      Номер телефону: ${tel}
-      Повідомлення: ${area}
-      Тип клієнта: ${clientType}
-    `;
-
     try {
-      const response = await axios.post(URI_API, {
-        chat_id: CHAT_ID,
-        text: telegramMessage,
-        parse_mode: 'HTML',
-      });
+      const { message } = req.body; // Переконайтеся, що відправляється правильне повідомлення
 
-      // Якщо повідомлення успішно відправлено
-      res.status(200).json({ success: true });
+      // Відправка повідомлення в Telegram
+      const response = await axios.post(
+        `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
+        {
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message
+        }
+      );
+
+      // Відповідь клієнту
+      res.status(200).json({ success: true, response });
     } catch (error) {
-      console.error('Telegram API Error:', error);
+      console.error('Error sending message:', error);
       res.status(500).json({ success: false, error: error.message });
     }
   } else {
-    // Непідтримуваний метод
     res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
-}
+};
