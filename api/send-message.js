@@ -1,39 +1,39 @@
-// /api/send-message.js
+// pages/api/send-message.js
 
-import axios from 'axios';
+import axios from 'axios'; // або require('axios') для CommonJS
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    // Отримуємо дані з тіла запиту
     const { username, tel, area, clientType } = req.body;
+    
+    // Отримуємо змінні з середовища
+    const TOKEN = process.env.TELEGRAM_TOKEN;
+    const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-    const TOKEN = process.env.TELEGRAM_TOKEN;  // Токен Telegram бота
-    const CHAT_ID = process.env.TELEGRAM_CHAT_ID;  // ID чату
-    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;  // URL для запиту до Telegram API
-
-    const message = `Повідомлення з сайту!\n`;
-    message += `Ім'я: ${username} \n`;
-    message += `Номер телефону: ${tel}\n`;
-    message += `Повідомлення: ${area} \n`;
-    message += `Тип клієнта: ${clientType} \n`;
+    const telegramMessage = `
+      Повідомлення з сайту:
+      Ім'я: ${username}
+      Номер телефону: ${tel}
+      Повідомлення: ${area}
+      Тип клієнта: ${clientType}
+    `;
 
     try {
-      // Виконуємо POST запит до Telegram API
       const response = await axios.post(URI_API, {
         chat_id: CHAT_ID,
+        text: telegramMessage,
         parse_mode: 'HTML',
-        text: message,
       });
 
-      // Повертаємо успішну відповідь
-      return res.status(200).json({ success: true, message: 'Message sent successfully!' });
-    } catch (err) {
-      // Якщо сталася помилка при відправці повідомлення
-      console.error('Error:', err.message);
-      return res.status(500).json({ success: false, error: 'Failed to send message', details: err.message });
+      // Якщо повідомлення успішно відправлено
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error('Telegram API Error:', error);
+      res.status(500).json({ success: false, error: error.message });
     }
   } else {
-    // Якщо метод не POST, повертаємо помилку
-    return res.status(405).json({ success: false, error: 'Method Not Allowed' });
+    // Непідтримуваний метод
+    res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 }
