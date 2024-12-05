@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
       const { username, tel, area, client } = req.body;
 
       // Перевірка, чи всі необхідні поля заповнені
-      if (!username || !tel) {
+      if (!username || !tel || !client) {
         return res.status(400).json({ success: false, message: 'All fields are required' });
       }
 
@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         Name: ${username}
         Phone: ${tel}
         Message: ${area}
-        Client Type: ${client}
+        Client Type: ${client}  // Тут додається тип клієнта з radio button
       `;
 
       // Формуємо запит до Telegram API
