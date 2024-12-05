@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config();  // Завантажуємо змінні середовища
 
 const burgerMenu = document.getElementById('burger-menu');
 const menu = document.querySelector('.header-menu');
@@ -22,14 +22,11 @@ menuItems.forEach(item => {
     if (menu.classList.contains('open')) {
       burgerMenu.classList.remove('open');
       menu.classList.remove('open');
-      
-      // Відновлюємо скрол після закриття меню
       document.body.style.overflow = '';
     }
   });
 });
 
-// Аккордеон
 function accordion() {
   const items = document.querySelectorAll('.accordion__item-trigger')
   items.forEach(item => {
@@ -48,10 +45,6 @@ function accordion() {
 }
 accordion()
 
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const triggers = document.querySelectorAll('.about-managers_trigger');
 
@@ -62,142 +55,94 @@ document.addEventListener('DOMContentLoaded', () => {
       if (parentBlock.classList.contains('active')) {
         parentBlock.classList.remove('active');
       } else {
-        // Если нужно закрывать другие блоки при открытии одного, раскомментируйте следующий код:
-        // document.querySelectorAll('.about-managers_accordion-block.active').forEach(activeBlock => {
-        //   activeBlock.classList.remove('active');
-        // });
-
         parentBlock.classList.add('active');
       }
     });
   });
+
+  // Маска для телефонного номеру
+  const phoneInput = document.getElementById('tel');
+  const phoneMask = new Inputmask([
+    '+420999999999', 
+    '+48 999 999 999'
+  ]);
+  phoneMask.mask(phoneInput);
 });
 
-window.scrollTo({
-  top: 10, // кількість пікселів зверху
-  behavior: 'smooth' // плавність анімації
-});
+const modal = document.querySelector('.modal');
+const modalWindow = document.querySelector('.modal_window');
+const openButtons = document.querySelectorAll('.contact-uss');
+const closeButton = document.querySelector('.modal_close');
+const body = document.querySelector('body');
 
-
-
-// Отримуємо елементи
-const modal = document.querySelector('.modal'); // Модальне вікно
-const modalWindow = document.querySelector('.modal_window'); // Вікно всередині модального
-const openButtons = document.querySelectorAll('.contact-uss'); // Кнопки для відкриття модалки
-const closeButton = document.querySelector('.modal_close'); // Кнопка для закриття модалки
-const body = document.querySelector('body'); // Тіло сторінки
-
-// Функція для відкриття модального вікна
 function openModal() {
   modalWindow.style.display = 'block';
   modal.style.display = 'block';
-  body.style.overflow = 'hidden'; // Блокуємо прокручування сторінки
+  body.style.overflow = 'hidden'; 
 }
 
-// Функція для закриття модального вікна
 function closeModal() {
   modalWindow.style.display = 'none';
   modal.style.display = 'none';
-  body.style.overflow = ''; // Відновлюємо прокручування сторінки
+  body.style.overflow = ''; 
 }
 
-// Додаємо слухачі подій на кнопки для відкриття модалки
 openButtons.forEach(button => {
   button.addEventListener('click', openModal);
 });
 
-// Додаємо слухач на кнопку закриття модалки
 closeButton.addEventListener('click', closeModal);
 
-// Закриваємо модальне вікно при кліку поза ним
 window.addEventListener('click', (event) => {
   if (event.target === modal) {
     closeModal();
   }
 });
 
-
-
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
 document.querySelector('.modal_form').addEventListener('submit', function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Створення повідомлення для відправки
-    let message = `Повідомлення з сайту!\n`;
-    message += `Ім'я: ${this.username.value} \n`;
-    message += `Номер телефону: ${this.tel.value}\n`;
-    message += `Повідомлення: ${this.area.value} \n`;
+  let message = `Повідомлення з сайту!\n`;
+  message += `Ім'я: ${this.username.value} \n`;
+  message += `Номер телефону: ${this.tel.value}\n`;
+  message += `Повідомлення: ${this.area.value} \n`;
 
-    // Отримуємо вибрану радіокнопку
-    const clientRadioButtons = this.querySelectorAll('input[name="client"]');
-    let clientType = 'Не вибрано';
-    
-    // Шукаємо вибрану радіокнопку
-    clientRadioButtons.forEach((radio) => {
-        if (radio.checked) {
-            clientType = radio.value;
-        }
-    });
-
-    message += `Тип клієнта: ${clientType} \n`;
-
-    // Відправка повідомлення через Telegram API
-    axios.post(URI_API, {
-        chat_id: CHAT_ID,
-        parse_mode: 'HTML', // Замінили 'parse_mod' на правильний 'parse_mode'
-        text: message
-    })
-    .then((res) => {
-        // Очищення полів форми після відправки
-        this.username.value = "";
-        this.tel.value = "";
-        this.area.value = "";
-        const radioButtons = this.querySelectorAll('input[type="radio"]');
-        radioButtons.forEach((radio) => radio.checked = false);
-
-        // Показуємо звичайний alert після успішної відправки
-        alert("Thank you, we will get in touch with you shortly!");
-
-        // Закриваємо модальне вікно
-        closeModal();
-    })
-    .catch((err) => {
-        console.warn(err); 
-        alert("Something went wrong.");
-
-        // Закриваємо модальне вікно
-        closeModal();
-    })
-    .finally(() => {
-        console.log('end');
-    });
-});
-
-// Функція для закриття модального вікна
-function closeModal() {
-    const modal = document.querySelector('.modal'); // Модальне вікно
-    const modalWindow = document.querySelector('.modal_window'); // Вікно всередині модального
-    const body = document.querySelector('body'); // Тіло сторінки
-
-    modalWindow.style.display = 'none';
-    modal.style.display = 'none';
-    body.style.overflow = ''; // Відновлюємо прокручування сторінки
-}
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const phoneInput = document.getElementById('tel');
-
-  // Маска для телефонного номеру з початком +420 або +48
-  const phoneMask = new Inputmask([
-      '+4999999999999',  // Маска для +420
-  ]);
+  const clientRadioButtons = this.querySelectorAll('input[name="client"]');
+  let clientType = 'Не вибрано';
   
-  phoneMask.mask(phoneInput);  // Підключення маски до поля вводу
-});
+  clientRadioButtons.forEach((radio) => {
+    if (radio.checked) {
+      clientType = radio.value;
+    }
+  });
 
+  message += `Тип клієнта: ${clientType} \n`;
+
+  axios.post(URI_API, {
+    chat_id: CHAT_ID,
+    parse_mode: 'HTML',
+    text: message
+  })
+  .then((res) => {
+    this.username.value = "";
+    this.tel.value = "";
+    this.area.value = "";
+    const radioButtons = this.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach((radio) => radio.checked = false);
+
+    alert("Thank you, we will get in touch with you shortly!");
+    closeModal();
+  })
+  .catch((err) => {
+    console.warn(err); 
+    alert("Something went wrong.");
+    closeModal();
+  })
+  .finally(() => {
+    console.log('end');
+  });
+});
