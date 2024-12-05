@@ -8,10 +8,9 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 module.exports = async (req, res) => {
   if (req.method === 'POST') {
     try {
-      // Отримуємо дані з тіла запиту
       const { username, tel, area, client } = req.body;
 
-      // Перевірка, чи є всі необхідні поля
+      // Перевірка, чи всі необхідні поля заповнені
       if (!username || !tel || !area || !client) {
         return res.status(400).json({ success: false, message: 'All fields are required' });
       }
@@ -31,7 +30,7 @@ module.exports = async (req, res) => {
         `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
         {
           chat_id: TELEGRAM_CHAT_ID,
-          text: message, // Це повідомлення буде надіслано в Telegram
+          text: message,
         }
       );
 
@@ -44,4 +43,3 @@ module.exports = async (req, res) => {
     res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 };
-
