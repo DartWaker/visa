@@ -1,3 +1,5 @@
+
+
 const burgerMenu = document.getElementById('burger-menu');
 const menu = document.querySelector('.header-menu');
 const menuItems = document.querySelectorAll('.header-menu_item');
@@ -29,21 +31,26 @@ menuItems.forEach(item => {
 
 // Аккордеон
 function accordion() {
-  const items = document.querySelectorAll('.accordion__item-trigger');
+  const items = document.querySelectorAll('.accordion__item-trigger')
   items.forEach(item => {
     item.addEventListener('click', () => {
-      const parent = item.parentNode;
+      const parent = item.parentNode
       if (parent.classList.contains('accordion__item-active')) {
-        parent.classList.remove('accordion__item-active');
+        parent.classList.remove('accordion__item-active')
       } else {
-        document.querySelectorAll('.accordion__item')
-          .forEach(child => child.classList.remove('accordion__item-active'));
-        parent.classList.add('accordion__item-active');
+        document
+          .querySelectorAll('.accordion__item')
+          .forEach(child => child.classList.remove('accordion__item-active'))
+        parent.classList.add('accordion__item-active')
       }
-    });
-  });
+    })
+  })
 }
-accordion();
+accordion()
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const triggers = document.querySelectorAll('.about-managers_trigger');
@@ -55,6 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (parentBlock.classList.contains('active')) {
         parentBlock.classList.remove('active');
       } else {
+        // Если нужно закрывать другие блоки при открытии одного, раскомментируйте следующий код:
+        // document.querySelectorAll('.about-managers_accordion-block.active').forEach(activeBlock => {
+        //   activeBlock.classList.remove('active');
+        // });
+
         parentBlock.classList.add('active');
       }
     });
@@ -66,7 +78,9 @@ window.scrollTo({
   behavior: 'smooth' // плавність анімації
 });
 
-// Модальне вікно та форма
+
+
+// Отримуємо елементи
 const modal = document.querySelector('.modal'); // Модальне вікно
 const modalWindow = document.querySelector('.modal_window'); // Вікно всередині модального
 const openButtons = document.querySelectorAll('.contact-uss'); // Кнопки для відкриття модалки
@@ -102,43 +116,52 @@ window.addEventListener('click', (event) => {
   }
 });
 
-// Маска для телефонного номеру з початком +420 або +48
-document.addEventListener('DOMContentLoaded', function() {
-  const phoneInput = document.getElementById('tel');
-  const phoneMask = new Inputmask('+9999999999999');  // Маска для телефонного номеру
-  phoneMask.mask(phoneInput);  // Підключення маски до поля вводу
-});
-
-// Відправка форми через API
+// Відправка форми через API за допомогою Axios
 document.querySelector('.modal_form').addEventListener('submit', function (e) {
-  e.preventDefault();
+  e.preventDefault(); // Запобігаємо стандартному відправленню форми
 
+  // Збираємо дані форми
   const messageData = {
     username: this.username.value,
     tel: this.tel.value,
     area: this.area.value,
-    clientType: this.text.value
+    text: this.text.value // Отримуємо значення з нового поля text
   };
 
-  // Відправка запиту на сервер
-  fetch('/api/send-message', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(messageData)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      alert('Thank you, we will get in touch with you shortly!');
-      closeModal(); // Закриваємо модальне вікно
-    } else {
-      alert('Something went wrong.');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Something went wrong.');
-  });
+  // Перевірка, чи всі обов'язкові поля заповнені
+  if (!messageData.username || !messageData.tel || !messageData.text) {
+    alert('All fields are required.');
+    return; // Якщо якийсь з обов\'язкових полів не заповнено, зупиняємо відправку
+  }
+
+  // Використовуємо Axios для відправки запиту на сервер
+  axios.post('/api/send-message', messageData)
+    .then(response => {
+      if (response.data.success) {
+        alert('Thank you, we will get in touch with you shortly!');
+        closeModal(); // Закриваємо модальне вікно, якщо є така функція
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again.');
+    });
 });
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const phoneInput = document.getElementById('tel');
+
+  // Маска для телефонного номеру з початком +420 або +48
+  const phoneMask = new Inputmask([
+      '+4999999999999',  // Маска для +420
+  ]);
+  
+  phoneMask.mask(phoneInput);  // Підключення маски до поля вводу
+});
+

@@ -8,7 +8,7 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 module.exports = async (req, res) => {
   if (req.method === 'POST') {
     try {
-      const { username, tel, area, text } = req.body;
+      const { username, tel, area, text } = req.body; // Отримуємо нове поле text
 
       // Перевірка, чи всі необхідні поля заповнені
       if (!username || !tel || !text) {
@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         Name: ${username}
         Phone: ${tel}
         Message: ${area}
-        Client Type: ${text}  // Тут додається тип клієнта з radio button
+        Text: ${text}  // Тут додається введений текст
       `;
 
       // Формуємо запит до Telegram API
