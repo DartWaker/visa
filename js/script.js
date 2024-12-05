@@ -133,12 +133,12 @@ document.querySelector('.modal_form').addEventListener('submit', function (e) {
     return; // Якщо якийсь з обов\'язкових полів не заповнено, зупиняємо відправку
   }
 
+  // Закриваємо модальне вікно перед відправкою запиту
+  closeModal();
+
   // Використовуємо Axios для відправки запиту на сервер
   axios.post('/api/send-message', messageData)
     .then(response => {
-      // Незалежно від результату, ми закриваємо модальне вікно
-      closeModal();
-
       // Якщо запит успішний
       if (response.data.success) {
         alert('Thank you, we will get in touch with you shortly!');
@@ -150,7 +150,6 @@ document.querySelector('.modal_form').addEventListener('submit', function (e) {
     .catch(error => {
       // Відображаємо повідомлення про помилку навіть при помилці
       console.error('Error:', error);
-      closeModal();
       alert('Thank you, we will get in touch with you shortly!');
     });
 });
